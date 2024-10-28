@@ -1,0 +1,20 @@
+export component Icon inherits Rectangle {
+    width: 100%;
+    in property <image> src;
+    in property <string> name;
+    in property <color> colorize;
+    in-out property <int> active;
+    in property <int> index;
+    callback click();
+    TouchArea {
+        mouse-cursor: MouseCursor.pointer;
+        Image {
+            source: src;
+            colorize: active == index ? colorize : #000;
+        }
+
+        clicked => {
+            click();
+        }
+    }
+}

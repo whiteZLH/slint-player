@@ -1,0 +1,22 @@
+import { Player } from "../components/Player.slint";
+export component BaseView inherits Rectangle {
+    background: red;
+    height: 100%;
+    width: 100%;
+    VerticalLayout {
+        header := Rectangle {
+            height: 10%;
+            background: green;
+        }
+
+        container := Rectangle {
+            height: 80%;
+            @children
+        }
+
+        player := Player {
+            background: #FFF;
+            height: 20%;
+        }
+    }
+}

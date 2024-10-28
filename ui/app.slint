@@ -1,0 +1,31 @@
+import {MainView} from "./index.slint";
+import { VerticalBox, TabWidget } from "std-widgets.slint";
+import { Menu } from "components/Menu.slint";
+import { SMenu } from "modules/surrealism-ui/index.slint";
+import { SearchView } from "views/SearchView.slint";
+import { ListView } from "views/ListView.slint";
+
+export component App inherits Window {
+    height: 600px;
+    width: 900px;
+    in property <image> img;
+    property <string> active-name:"search";
+    HorizontalLayout {
+        height: 100%;
+        VerticalLayout {
+            alignment: center;
+            menu := Menu {
+                active-name: active-name;
+                width: 5%;
+                height: 100%;
+            }
+        }
+
+        if root.active-name == "search": SearchView { }
+        if active-name == "list": ListView { }
+    }
+
+    Image {
+        source: img;
+    }
+}

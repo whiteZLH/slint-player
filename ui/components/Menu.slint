@@ -1,0 +1,44 @@
+import { SMenu } from "../modules/surrealism-ui/index.slint";
+import { VerticalBox } from "std-widgets.slint";
+import { Icon } from "Icon.slint";
+export component Menu inherits Rectangle {
+    preferred-height: 100%;
+    preferred-width: 100%;
+    in-out property <string> active-name;
+    in-out property <int> active: 0;
+    in-out property <int> icon-box-size;
+    property <[{name:string,src:image,color:color}]> items:[
+        { name:"search", src:@image-url("../assets/search.svg"), color:#00AEEC },
+        { name:"list", src:@image-url("../assets/list.svg"), color:#00AEEC },
+        { name:"setting", src:@image-url("../assets/setting.svg"), color:#00AEEC }
+    ];
+    callback reset();
+    Rectangle {
+        border-radius: 5px;
+        background: white;
+        height: 100%;
+        width: 100%;
+        HorizontalLayout {
+            width: 100%;
+            height: 100%;
+            alignment: center;
+            container := VerticalLayout {
+                alignment: space-around;
+                width: 100%;
+                for item[index] in items: Icon {
+                    name: item.name;
+                    src: item.src;
+                    colorize: item.color;
+                    index: index;
+                    active: active;
+                    click => {
+                        if active != index {
+                            root.active = index;
+                            root.active-name = item.name;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
