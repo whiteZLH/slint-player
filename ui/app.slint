@@ -1,14 +1,20 @@
 import {MainView} from "./index.slint";
-import { VerticalBox, TabWidget } from "std-widgets.slint";
+import { VerticalBox, TabWidget, Slider } from "std-widgets.slint";
 import { Menu } from "components/Menu.slint";
 import { SMenu } from "modules/surrealism-ui/index.slint";
 import { SearchView } from "views/SearchView.slint";
 import { ListView } from "views/ListView.slint";
+import { SCard } from "modules/surrealism-ui/src/card/index.slint";
+import { SAlert } from "modules/surrealism-ui/src/alert/index.slint";
 
 export component App inherits Window {
-    height: 600px;
-    width: 900px;
-    in property <image> img;
+    preferred-height: 600px;
+    preferred-width: 900px;
+    min-height: 600px;
+    min-width: 900px;
+    no-frame: true;
+    title: "BiliMusic";
+    callback mouse_move(length, length);
     property <string> active-name:"search";
     HorizontalLayout {
         height: 100%;
@@ -21,11 +27,15 @@ export component App inherits Window {
             }
         }
 
-        if root.active-name == "search": SearchView { }
-        if active-name == "list": ListView { }
-    }
-
-    Image {
-        source: img;
+        if root.active-name == "search": SearchView {
+            moved(x, y) => {
+                mouse_move(x,y)
+            }
+        }
+        if active-name == "list": ListView {
+            moved(x, y) => {
+                mouse_move(x,y)
+            }
+        }
     }
 }

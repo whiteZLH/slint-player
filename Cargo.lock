@@ -3396,8 +3396,10 @@ dependencies = [
 name = "slint-player"
 version = "0.1.0"
 dependencies = [
+ "i-slint-backend-winit",
  "slint",
  "slint-build",
+ "winit",
 ]
 
 [[package]]

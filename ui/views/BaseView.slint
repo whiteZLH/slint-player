@@ -3,20 +3,26 @@ export component BaseView inherits Rectangle {
     background: red;
     height: 100%;
     width: 100%;
-    VerticalLayout {
-        header := Rectangle {
-            height: 10%;
-            background: green;
+    callback moved(length, length);
+    TouchArea {
+        VerticalLayout {
+            header := Rectangle {
+                height: 10%;
+                background: green;
+            }
+
+            container := Rectangle {
+                height: 80%;
+                @children
+            }
+
+            player := Player {
+                background: #FFF;
+            }
         }
 
-        container := Rectangle {
-            height: 80%;
-            @children
-        }
-
-        player := Player {
-            background: #FFF;
-            height: 20%;
+        moved => {
+            root.moved(self.mouse-x - self.pressed-x, self.mouse-y - self.pressed-y);
         }
     }
 }

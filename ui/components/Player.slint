@@ -1,13 +1,18 @@
+import { VerticalBox } from "std-widgets.slint";
 export component Player inherits Rectangle {
+    in property <image> image;
     HorizontalLayout {
-        height: 20%;
+        height: 100%;
         cover := Rectangle {
-            width: 10%;
-            height: 10%;
-            Image {
-                width: 100px;
-                height: 100px;
-                source: @image-url("https://i2.hdslb.com/bfs/archive/ca6ddd4f1c89af8133cae0fe38cd72c2d54f8e17.jpg");
+            width: 14%;
+            background: black;
+            VerticalLayout {
+                height: 100%;
+                Image {
+                    height: 100%;
+                    source: @image-url("../assets/cover2.png");
+                    image-fit: fill;
+                }
             }
         }
 
