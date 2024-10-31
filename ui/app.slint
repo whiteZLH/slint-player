@@ -6,6 +6,7 @@ import { SearchView } from "views/SearchView.slint";
 import { ListView } from "views/ListView.slint";
 import { SCard } from "modules/surrealism-ui/src/card/index.slint";
 import { SAlert } from "modules/surrealism-ui/src/alert/index.slint";
+import { Icon } from "modules/surrealism-ui/src/icon/icon.slint";
 
 export component App inherits Window {
     preferred-height: 600px;
@@ -14,27 +15,64 @@ export component App inherits Window {
     min-width: 900px;
     no-frame: true;
     title: "BiliMusic";
-    callback mouse_move(length, length);
+    callback mouse_move();
+    callback search(string);
     property <string> active-name:"search";
     HorizontalLayout {
         height: 100%;
-        VerticalLayout {
-            alignment: center;
-            menu := Menu {
-                active-name: active-name;
-                width: 5%;
+        Rectangle {
+            width: 10%;
+            background: #fff;
+            VerticalLayout {
+                alignment: space-between;
+                width: 100%;
                 height: 100%;
+                logo := Rectangle {
+                    height: 10%;
+                    // border-color: gold;
+                    border-width: 1px;
+                }
+
+                Rectangle {
+                    height: 90%;
+                    border-color: gold;
+                    border-width: 1px;
+                    VerticalLayout {
+                        topOptions := Rectangle {
+                            // border-color: gold;
+                            border-width: 1px;
+                            height: 50%;
+                            VerticalLayout {
+                                menu := Menu {
+                                    active-name: active-name;
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            }
+                        }
+
+                        endOptions := Rectangle {
+                            VerticalLayout {
+                                alignment: end;
+                                Icon { }
+                            }
+                        }
+                    }
+                }
             }
         }
 
         if root.active-name == "search": SearchView {
-            moved(x, y) => {
-                mouse_move(x,y)
+            search(text) => {
+                root.search(text)
+            }
+            moved() => {
+                mouse_move()
             }
         }
         if active-name == "list": ListView {
-            moved(x, y) => {
-                mouse_move(x,y)
+            moved() => {
+                mouse_move()
             }
         }
     }
